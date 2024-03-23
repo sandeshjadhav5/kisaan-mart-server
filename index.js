@@ -1,5 +1,6 @@
 const express = require("express");
 const { connection } = require("./configs/db");
+const {userRouter}=require("./routes/user.routes")
 
 const cors = require("cors");
 
@@ -17,6 +18,8 @@ app.use(
 app.get("/", (req, res) => {
   res.send("Kisaan Mart");
 });
+
+app.use("/users",userRouter)
 
 
 
