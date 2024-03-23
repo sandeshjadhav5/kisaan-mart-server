@@ -63,9 +63,16 @@ const transporter =  nodemailer.createTransport({
         subject: 'Email Verification',
         text: "Verify Email",
         html: `
-          <p>Thank you for registering. Please use below token to verify your email address:</p>
-          <h1>verification token : ${newUser.verificationToken}</h1>
-        `,
+        <div style="background-color: #f5f5f5; padding: 20px;">
+          <h1 style="color: green; text-align: center;">Kisaan Mart</h1>
+          <h2 style="color: #333333;">Thank you for registering!</h2>
+          <p style="color: #666666;">Please use the below token to verify your email address:</p>
+          <div style="background-color: #ffffff; border: 1px solid #cccccc; padding: 10px; margin-top: 10px;">
+            <h3 style="color: #333333;">Verification Token:</h3>
+            <p style="color: #0066cc; font-weight: bold;">${newUser.verificationToken}</p>
+          </div>
+        </div>
+      `,
       });
   
       res.status(201).json({ message: 'User registered successfully. Please check your email to verify your account.' });
