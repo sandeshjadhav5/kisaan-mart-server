@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
         enum: ['Seeds', 'Fertilizers', 'Pesticides', 'Organic', 'Agri Implements',"Gardening","Others"],
         required: true,
       },
-      imageUrl: String, // Image URL field
+      imageUrl: String, 
       rating: {
         type: Number,
         default: 0,
