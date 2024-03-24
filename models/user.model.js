@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ProductModel = require('./product.model');
 
 // Define the User schema
 const userSchema = new mongoose.Schema({
@@ -12,6 +13,18 @@ const userSchema = new mongoose.Schema({
     required: true,
     // unique: true,
   },
+  orders: [
+    {
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   password: {
     type: String,
     required: true,
