@@ -38,9 +38,9 @@ const transporter =  nodemailer.createTransport({
     try {
       // Check if the user already exists
       const existingUser = await UserModel.findOne({ email });
-    //   if (existingUser) {
-    //     return res.status(400).json({ message: 'User already exists with this email.' });
-    //   }
+      if (existingUser) {
+        return res.status(400).json({ message: 'User already exists with this email.' });
+      }
   
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -75,7 +75,7 @@ const transporter =  nodemailer.createTransport({
       `,
       });
   
-      res.status(201).json({ message: 'User registered successfully. Please check your email to verify your account.' });
+      res.status(201).json({ message: 'User registered successfully. Please check your email to verify your account.',newUser });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Registration failed.' });
@@ -132,10 +132,10 @@ userRouter.post('/login', async (req, res) => {
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET, // Use a secure secret key (store it in environment variables)
-      { expiresIn: '1h' } // Token expiration time
+      { expiresIn: '1d' } // Token expiration time
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({user, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Login failed.' });
