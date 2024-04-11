@@ -143,4 +143,48 @@ userRouter.post('/login', async (req, res) => {
   }
 });
 
+// Route to get list of all users
+userRouter.get('/allusers', async (req, res) => {
+  try {
+    // Fetch all users from the database
+    const users = await UserModel.find({}, { password: 0, verificationToken: 0 });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch users.' });
+  }
+});
+
+// Route to update a user
+userRouter.put('/users/:id', async (req, res) => {
+  const userId = req.params.id;
+  const updateData = req.body;
+
+  try {
+    // Update the user in the database
+    const updatedUser = await UserModel.findByIdAndUpdate(userId, updateData, { new: true });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to update user.' });
+  }
+});
+
+// Route to delete a user
+userRouter.delete('/users/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Delete the user from the database
+    await UserModel.findByIdAndDelete(userId);
+
+    res.status(200).json({ message: 'User deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to delete user.' });
+  }
+});
+
 module.exports = {userRouter};
