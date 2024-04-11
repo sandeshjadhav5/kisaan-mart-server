@@ -33,7 +33,7 @@ const transporter =  nodemailer.createTransport({
   
   // Register route
   userRouter.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password,role } = req.body;
   
     try {
       // Check if the user already exists
@@ -50,6 +50,7 @@ const transporter =  nodemailer.createTransport({
         username,
         email,
         password: hashedPassword,
+        role,
         verificationToken: generateToken(), // Generate or assign the verification token
       });
   

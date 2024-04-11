@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ProductModel = require('./product.model');
+const mongoose = require("mongoose");
+const ProductModel = require("./product.model");
 
 // Define the User schema
 const userSchema = new mongoose.Schema({
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     {
       product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
+        ref: "Product",
       },
       quantity: {
         type: Number,
@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
   },
   verified: {
     type: Boolean,
@@ -40,6 +45,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const UserModel = mongoose.model('user', userSchema);
+const UserModel = mongoose.model("user", userSchema);
 
 module.exports = UserModel;
