@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
 app.use("/users", userRouter);
 app.use("/products", productRouter);
 
-//starting server from here
 app.listen(process.env.port, async () => {
   try {
     await connection;
