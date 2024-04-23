@@ -1,7 +1,7 @@
 const express = require("express");
 const { connection } = require("./configs/db");
-const {userRouter}=require("./routes/user.routes")
-const {productRouter}=require("./routes/product.routes")
+const { userRouter } = require("./routes/user.routes");
+const { productRouter } = require("./routes/product.routes");
 
 const cors = require("cors");
 
@@ -20,13 +20,10 @@ app.get("/", (req, res) => {
   res.send("Kisaan Mart");
 });
 
-app.use("/users",userRouter)
-app.use("/products",productRouter)
+app.use("/users", userRouter);
+app.use("/products", productRouter);
 
-
-
-
-
+//starting server from here
 app.listen(process.env.port, async () => {
   try {
     await connection;
